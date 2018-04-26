@@ -57,9 +57,9 @@ class Seedalot():
         try:
             rows=int(self.params['rows'])
             cols=int(self.params['cols'])
-            if rows<0 or rows>100 or cols<0 or cols>100: raise ValueError
+            if rows<0 or rows>20 or cols<0 or cols>20: raise ValueError
         except:
-            raise ValueError('Invalid rows ({}) or columns ({}). Expecting a number 0-100'.format(self.params['rows'],self.params['cols']))
+            raise ValueError('Invalid rows ({}) or columns ({}). Expecting a number 0-20'.format(self.params['rows'],self.params['cols']))
 
         #get points from the server
         response = requests.get(self.api_url + 'points', headers=self.headers)
@@ -70,7 +70,7 @@ class Seedalot():
                           if p['x'] == int(self.params['x']) and p['y'] == int(self.params['y'])
                           and p['pointer_type'].lower()=='plant').copy()
         except: raise ValueError('Plant is not found @ ({},{})'.format(self.params['x'],self.params['y']))
-        self.log_point(point, 'Selected:')
+        self.log_point(point, 'Original plant: ')
 
         #query openfarm for row_spacing
         response = requests.get(
@@ -91,24 +91,28 @@ class Seedalot():
                     try: existing_id = next(p for p in points if p['x'] == point['x'] and p['y'] == point['y'])['id']
                     except: existing_id=0
                     #Logging only
-                    if self.params['action'] == 'log':
-                        self.log_point(point,'Considered:')
+                    if self.params['action'].lower() == 'log':
+                        self.log_point(point,'Considered: ')
                     #Adding a plant
-                    if self.params['action']=='add':
-                        if existing_id==0:
-                            self.log_point(point,'Adding:')
-                            response = requests.post(self.api_url + 'points', headers=self.headers, data=json.dumps(point))
-                            self.handle_error(response)
-                        else:
-                            self.log('Something already planted @ ({},{})'.format(point['x'],point['y']),'warn')
+                    else:
+                        if self.params['action'].lower()=='add':
+                            if existing_id==0:
+                                self.log_point(point,'Adding: ')
+                                response = requests.post(self.api_url + 'points', headers=self.headers, data=json.dumps(point))
+                                self.handle_error(response)
+                            else:
+                                self.log('Something already planted @ ({},{})'.format(point['x'],point['y']),'warn')
                     # Removing a plant
-                    if self.params['action'] == 'remove':
-                        if existing_id!=0:
-                            if len(ids) != 0: ids += ','
-                            ids += str(existing_id)
-                        else: self.log('Plant is not found, but it is ok @ {},{}'.format(point['x'],point['y']),'warn')
+                        else:
+                            if self.params['action'].lower() == 'remove':
+                                if existing_id!=0:
+                                    if len(ids) != 0: ids += ','
+                                    ids += str(existing_id)
+                                else: self.log('Plant is not found, but it is ok @ {},{}'.format(point['x'],point['y']),'warn')
+                            else:
+                                raise ValueError('Unknown action: {}'.format(self.params['action']))
                 point['y'] += r
-            # actually deleting if there is somethign to delete
+            # actually deleting if there is something to delete
             if len(ids) != 0:
                 self.log('Removing {} plants'.format(ids.count(',')+1))
                 response = requests.delete(self.api_url + 'points/{}'.format(ids), headers=self.headers)
