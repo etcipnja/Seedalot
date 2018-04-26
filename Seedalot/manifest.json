@@ -3,7 +3,7 @@
 "language": "python",
 "author": "etcipnja",
 "description": "Clones given plant with the given parameters ",
-"version": "1.0.3",
+"version": "1.0.4",
 "min_os_version_major": 6,
 "url":"https://raw.githubusercontent.com/etcipnja/Seedalot/master/Seedalot/manifest.json",
 "zip": "https://github.com/etcipnja/Seedalot/archive/master.zip",

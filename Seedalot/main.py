@@ -36,19 +36,15 @@ class Seedalot():
         try:
             log_message = '[{}] {}'.format(APP_NAME, message)
             node = {'kind': 'send_message', 'args': {'message': log_message, 'message_type': message_type}}
-
-            base_url = os.environ['FARMWARE_URL']
-            base_url = base_url + 'api/v1/' if os.environ['FARMBOT_OS_VERSION'] > 5 else base_url
-
-            ret = requests.post(base_url + 'celery_script', data=json.dumps(node), headers=self.headers)
+            ret = requests.post(os.environ['FARMWARE_URL']+'api/v1/celery_script', data=json.dumps(node), headers=self.headers)
             message = log_message
-        except:
-            pass
+        except: pass
 
         print(message)
+
     # ------------------------------------------------------------------------------------------------------------------
     def log_point(self, point, message='\t'):
-            self.log('{0:s} ({1:4d},{2:4d}) {3:s}'.format(message, point['x'], point['y'], point['name']))
+        self.log('{0:s} ({1:4d},{2:4d}) {3:s}'.format(message, point['x'], point['y'], point['name']))
 
     # ------------------------------------------------------------------------------------------------------------------
     def run(self):
@@ -111,13 +107,14 @@ class Seedalot():
                                 else: self.log('Plant is not found, but it is ok @ {},{}'.format(point['x'],point['y']),'warn')
                             else:
                                 raise ValueError('Unknown action: {}'.format(self.params['action']))
+                            # actually deleting if there is something to delete
+                            if (i==cols-1 and j==rows-1 and len(ids) != 0) or ids.count(',')>=19:
+                                    self.log('Removing {} plants'.format(ids.count(',') + 1))
+                                    response = requests.delete(self.api_url + 'points/{}'.format(ids),
+                                                               headers=self.headers)
+                                    self.handle_error(response)
+                                    ids = ''
                 point['y'] += r
-            # actually deleting if there is something to delete
-            if len(ids) != 0:
-                self.log('Removing {} plants'.format(ids.count(',')+1))
-                response = requests.delete(self.api_url + 'points/{}'.format(ids), headers=self.headers)
-                self.handle_error(response)
-                ids=''
             point['x'] += r
 
 
