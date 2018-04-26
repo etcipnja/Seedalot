@@ -11,15 +11,14 @@ of your "original" plant. The spacing between the plants is taken from openfarm 
 If you want to delete automatically created plants - do the same setup but specify "remove" action instead of "add"
 
 Reference:
-
-integer ORIGINAL PLANT X COORDINATE:    X coordinate of your "original" plant
-integer ORIGINAL PLANT Y COORDINATE:    Y coordinate of your "original" plant
-integer NUMBER OF ROWS:                 desired number of rows, shall be between 0 and 20
-integer NUMBER OF COLUMNS:              desired number of columns, shall be between 0 and 20
-string  WHAT TO DO WITH NEW PLANTS:     action that will be taken on every new plant:
-                                        - "add"     - adds a new plant if there is no plant in these coordinates already
-                                        - "remove"  - removes a plant if found
-                                        - "log"     - just prints info for debug purposes to the log
+- integer ORIGINAL PLANT X COORDINATE:    X coordinate of your "original" plant
+- integer ORIGINAL PLANT Y COORDINATE:    Y coordinate of your "original" plant
+- integer NUMBER OF ROWS:                 desired number of rows, shall be between 0 and 20
+- integer NUMBER OF COLUMNS:              desired number of columns, shall be between 0 and 20
+- string  WHAT TO DO WITH NEW PLANTS:     action that will be taken on every new plant:
+    - "add"     - adds a new plant if there is no plant in these coordinates already
+    - "remove"  - removes a plant if found
+    - "log"     - just prints info for debug purposes to the log
 
 Installation:
 
