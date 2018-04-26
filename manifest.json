@@ -8,7 +8,7 @@
 "url":"https://raw.githubusercontent.com/etcipnja/Seedalot/master/manifest.json",
 "zip": "https://github.com/etcipnja/Seedalot/archive/master.zip",
 "executable": "python",
-"args": ["Farmware-master/Seedalot/main.py"],
+"args": ["Seedalot-master/main.py"],
 "config": [
  {"name": "x", "label": "Original plant X coordinate:", "value": "-"},
  {"name": "y", "label": "Original plant Y coordinate:", "value": "-"},
