@@ -20,7 +20,7 @@ string  WHAT TO DO WITH NEW PLANTS:     action that will be taken on every new p
 
 Installation:
 Use this manifest to register farmware
-https://raw.githubusercontent.com/etcipnja/Seedalot/master/manifest.json
+https://raw.githubusercontent.com/etcipnja/Seedalot/master/Seedalot/manifest.json
 
 Bugs:
 I noticed that if you change a parameter in WebApplication/Farmware form - you need to place focus on some other
