@@ -1,0 +1,19 @@
+{
+"package": "Seedalot",
+"language": "python",
+"author": "etcipnja",
+"description": "Clones given plant with the given parameters ",
+"version": "1.0.0",
+"min_os_version_major": 6,
+"url": "https://raw.githubusercontent.com/etcipnja/Seedalot/master/Seedalot/manifest.json",
+"zip": "https://github.com/etcipnja/Seedalot/archive/master.zip",
+"executable": "python",
+"args": ["Farmware-master/Seedalot/main.py"],
+"config": [
+ {"name": "x", "label": "Original plant X coordinate:", "value": "-"},
+ {"name": "y", "label": "Original plant Y coordinate:", "value": "-"},
+ {"name": "rows", "label": "Number of rows (0-20):", "value": "0"},
+ {"name": "cols", "label": "Number of columns (0-20):", "value": "0"},
+ {"name": "action", "label": "What to do with new plants (add,remove,log)", "value": "log"}
+]
+}
