@@ -18,12 +18,12 @@ string  WHAT TO DO WITH NEW PLANTS:     action that will be taken on every new p
                                         - "remove"  - removes a plant if found
                                         - "log"     - just prints info for debug purposes to the log
 
-Bug:
+Bugs:
 I noticed that if you change a parameter in WebApplication/Farmware form - you need to place focus on some other
 field before you click "RUN". Otherwise old value is  passed to farmware script even though the new value
 is displayed in the form.
 
-What is next?:
+What is next?
 It would be a good idea to add manual override for the spacing between the plants in case if someone doens't like
 default vaule from openfarm
 
