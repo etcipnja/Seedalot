@@ -18,6 +18,10 @@ string  WHAT TO DO WITH NEW PLANTS:     action that will be taken on every new p
                                         - "remove"  - removes a plant if found
                                         - "log"     - just prints info for debug purposes to the log
 
+Installation:
+Use this manifest to register farmware
+https://raw.githubusercontent.com/etcipnja/Seedalot/master/manifest.json
+
 Bugs:
 I noticed that if you change a parameter in WebApplication/Farmware form - you need to place focus on some other
 field before you click "RUN". Otherwise old value is  passed to farmware script even though the new value
