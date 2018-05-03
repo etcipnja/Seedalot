@@ -16,6 +16,8 @@ class Seedalot():
         self.params['cols'] = os.environ.get(prefix+'_cols', '0')
         self.params['action'] = os.environ.get(prefix+'_action', 'log')
 
+        os.environ['mlh_pointname']='test'
+
         self.api_url = 'https://my.farmbot.io/api/'
         try: api_token = os.environ['API_TOKEN']
         except KeyError: raise ValueError('API_TOKEN not set')

@@ -37,6 +37,7 @@ It would be a good idea to add manual override for the spacing between the plant
 default vaule from openfarm
 
 Credits:
+
 With the lack of proper documentation about farmware I used this project as a reference point https://github.com/rdegosse/Loop-Plants-With-Filters/blob/master/README.md 
 
 Thank you,
