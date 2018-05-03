@@ -16,9 +16,6 @@ class Seedalot():
         self.params['cols'] = os.environ.get(prefix+'_cols', '0')
         self.params['action'] = os.environ.get(prefix+'_action', 'log')
 
-        self.log('VARRR {}'.format(os.environ.get('mlh_pointname', 'NOTHING')))
-        os.environ['mlh_pointname']='test'
-
         self.api_url = 'https://my.farmbot.io/api/'
         try: api_token = os.environ['API_TOKEN']
         except KeyError: raise ValueError('API_TOKEN not set')
@@ -26,6 +23,8 @@ class Seedalot():
         self.headers = {'Authorization': 'Bearer ' + api_token,'content-type': "application/json"}
 
         self.log(str(self.params))
+        self.log('VARRR {}'.format(os.environ.get('mlh_pointname', 'NOTHING')))
+        os.environ['mlh_pointname'] = 'test'
 
     # ------------------------------------------------------------------------------------------------------------------
     def handle_error(self, response):
