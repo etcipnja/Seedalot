@@ -25,6 +25,7 @@ class Seedalot():
         self.log(str(self.params))
         self.log('VARRR {}'.format(os.environ.get('mlh_pointname', 'NOTHING')))
         os.environ['mlh_pointname'] = 'test'
+        self.log('VARRR2 {}'.format(os.environ.get('mlh_pointname', 'NOTHING')))
 
     # ------------------------------------------------------------------------------------------------------------------
     def handle_error(self, response):
