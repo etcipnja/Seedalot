@@ -23,9 +23,24 @@ class Seedalot():
         self.headers = {'Authorization': 'Bearer ' + api_token,'content-type': "application/json"}
 
         self.log(str(self.params))
-        self.log('VARRR {}'.format(os.environ.get('mlh_pointname', 'NOTHING')))
-        os.environ['mlh_pointname'] = 'test'
-        self.log('VARRR2 {}'.format(os.environ.get('mlh_pointname', 'NOTHING')))
+
+        VARR='NOTHING'
+        try:
+            exchange=open('/tmp/exchange', 'r')
+            VARR = exchange.read()
+            self.log('GOOD {}'.format(VARR))
+        except Exception  as e:
+            self.log('BAD read {}'.format(e))
+
+        VARR='SOMETHING1'
+
+        try:
+            exchange=open('/tmp/exchange', 'w')
+            exchange.write(VARR)
+            self.log('write ok')
+        except Exception as e:
+            self.log('BAD write {}'.format(e))
+
 
     # ------------------------------------------------------------------------------------------------------------------
     def handle_error(self, response):
