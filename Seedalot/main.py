@@ -24,24 +24,6 @@ class Seedalot():
 
         self.log(str(self.params))
 
-        VARR='NOTHING'
-        try:
-            exchange=open('/tmp/exchange', 'r')
-            VARR = exchange.read()
-            self.log('GOOD {}'.format(VARR))
-        except Exception  as e:
-            self.log('BAD read {}'.format(e))
-
-        VARR='SOMETHING1'
-
-        try:
-            exchange=open('/tmp/exchange', 'w')
-            exchange.write(VARR)
-            self.log('write ok')
-        except Exception as e:
-            self.log('BAD write {}'.format(e))
-
-
     # ------------------------------------------------------------------------------------------------------------------
     def handle_error(self, response):
         if response.status_code != 200:
