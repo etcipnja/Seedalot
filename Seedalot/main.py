@@ -1,46 +1,27 @@
-import os
-import json
-import requests
+from Farmware import *
 
 APP_NAME = ((__file__.split(os.sep))[len(__file__.split(os.sep))-3]).replace('-master','')
 
 class Seedalot():
     # ------------------------------------------------------------------------------------------------------------------
     def __init__(self):
-
-        prefix = APP_NAME.lower().replace('-', '_')
-        self.params = {}
-        self.params['x'] = os.environ.get(prefix+'_x', '-')
-        self.params['y'] = os.environ.get(prefix+'_y', '-')
-        self.params['rows'] = os.environ.get(prefix+'_rows', '0')
-        self.params['cols'] = os.environ.get(prefix+'_cols', '0')
-        self.params['action'] = os.environ.get(prefix+'_action', 'log')
-
-        self.api_url = 'https://my.farmbot.io/api/'
-        try: api_token = os.environ['API_TOKEN']
-        except KeyError: raise ValueError('API_TOKEN not set')
-
-        self.headers = {'Authorization': 'Bearer ' + api_token,'content-type': "application/json"}
-
-        self.log(str(self.params))
+        Farmware.__init__(self,((__file__.split(os.sep))[len(__file__.split(os.sep)) - 3]).replace('-master', '').replace('-dev', ''))
 
     # ------------------------------------------------------------------------------------------------------------------
-    def handle_error(self, response):
-        if response.status_code != 200:
-            raise ValueError("{} {} returned {}".format(response.request.method, response.request.path_url,response.status_code))
-        return
+    def load_config(self):
 
-    # ------------------------------------------------------------------------------------------------------------------
-    def log(self, message, message_type='info'):
+        super(Farmware, self).load_config()
 
-        try:
-            log_message = '[{}] {}'.format(APP_NAME, message)
-            node = {'kind': 'send_message', 'args': {'message': log_message, 'message_type': message_type}}
-            ret = requests.post(os.environ['FARMWARE_URL']+'api/v1/celery_script', data=json.dumps(node), headers=self.headers)
-            message = log_message
-        except: pass
+        self.get_arg('action', "log")
+        self.get_arg('xy', (0,0))
+        self.get_arg('rows', 0)
+        self.get_arg('cols', 0)
 
-        print(message)
+        if rows < 0 or rows > 20 or cols < 0 or cols > 20:
+            raise ValueError('Invalid rows ({}) or columns ({}). Expecting a number 0-20'.format(self.params['rows'],
+                                                                                                 self.params['cols']))
+        self.log(str(self.args))
+
 
     # ------------------------------------------------------------------------------------------------------------------
     def log_point(self, point, message='\t'):
