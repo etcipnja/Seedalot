@@ -13,6 +13,6 @@
  {"name": "xy", "label": "Original plant coordinates x,y:", "value": "0,0"},
  {"name": "rows", "label": "Number of rows (0-20):", "value": "0"},
  {"name": "cols", "label": "Number of columns (0-20):", "value": "0"},
- {"name": "action", "label": "What to do with new plants (add,remove,log)", "value": "log"}
+ {"name": "operation", "label": "What to do with new plants (add,remove,log)", "value": "log"}
 ]
 }

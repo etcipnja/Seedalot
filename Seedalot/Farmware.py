@@ -68,7 +68,7 @@ class Farmware(object):
                 node = {'kind': 'send_message', 'args': {'message': log_message, 'message_type': message_type}}
                 response = requests.post(os.environ['FARMWARE_URL'] + 'api/v1/celery_script', data=json.dumps(node),headers=self.headers)
                 response.raise_for_status()
-            message = log_message
+                message = log_message
         except: pass
 
         print(message)
@@ -95,7 +95,7 @@ class Farmware(object):
     # ------------------------------------------------------------------------------------------------------------------
     def post(self, enpoint, data):
         if not self.debug:
-            response = requests.put(self.api_url + enpoint, headers=self.headers, data=json.dumps(data))
+            response = requests.post(self.api_url + enpoint, headers=self.headers, data=json.dumps(data))
             response.raise_for_status()
             return response.json()
 
