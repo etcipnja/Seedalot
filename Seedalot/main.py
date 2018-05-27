@@ -13,7 +13,7 @@ class Seedalot(Farmware):
         super(Seedalot, self).load_config()
 
         self.get_arg('operation', "remove")
-        self.get_arg('xy', (510,140))
+        self.get_arg('xy', (0,0))
         self.get_arg('rows', 4)
         self.get_arg('cols', 2)
 

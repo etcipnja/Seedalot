@@ -49,7 +49,10 @@ class Farmware(object):
     # loads config parameters
     def get_arg(self, name, default):
         prefix = self.app_name.lower().replace('-', '_')
-        self.args[name] = type(default)(os.environ.get(prefix + '_'+name, default))
+        if type(default)!=tuple:
+            self.args[name] = type(default)(os.environ.get(prefix + '_'+name, default))
+        else:
+            self.args[name] = ast.literal_eval(os.environ.get(prefix + '_' + name, str(default)))
 
         if name=='action':
             if self.args[name]!='real':
